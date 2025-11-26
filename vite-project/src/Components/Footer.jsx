@@ -13,8 +13,6 @@ import img16 from "../Img/img16.png"
 import img17 from "../Img/img17.png"
 import img18 from "../Img/img18.png"
 import img19 from "../Img/img19.png"
-
-
 const Footer = () => {
   return (
     <div className=" bottom-0 left-0 w-full  text-white p-4  bg-[#021736] ">

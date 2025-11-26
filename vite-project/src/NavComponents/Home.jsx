@@ -17,8 +17,8 @@ const Pej1 = () => {
     <Page2/>
    <ApiPage/>
     <Page3/>
+    
     <ApiPage2 />
-
 
      <Page4/>
     <Page5/>

@@ -29,7 +29,7 @@ const  ApiPage2 = () => {
               alt={item.name}
               className="w-full h-48 object-cover rounded-lg"
             />
-            <hp className="text-[16px]  mt-3">{item.name}</hp>
+            <h1 className="text-[16px]  mt-3">{item.name}</h1>
             <p className="text-lg font-bold mt-2">${item.price}</p>
             <p className="text-sm text-gray-500 mt-1">
               Rating: ⭐ {item.rating}
