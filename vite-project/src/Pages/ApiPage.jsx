@@ -1,42 +1,57 @@
-// ApiPage.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"; // 👈 qo'shildi
+import { Link } from "react-router-dom";
 
 const ApiPage = () => {
   const [allProducts, setAllProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios
-      .get("https://691aa27e2d8d7855756f8c58.mockapi.io/products2")
+      .get("https://6905b069ee3d0d14c13361c0.mockapi.io/product")
       .then((res) => {
-        const all = res.data.flatMap(cat => cat.products || []);
-        setAllProducts(all.slice(6, 10)); // 7-, 8-, 9-, 10-mahsulotlar
+        setAllProducts(res.data.slice(6, 10));
+        setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error("API xatosi:", err);
+        setLoading(false);
+      });
   }, []);
+
+  if (loading) {
+    return (
+      <div className="p-6 text-center text-lg">Mahsulotlar yuklanmoqda...</div>
+    );
+  }
 
   return (
     <div className="p-6">
-      <div className="flex items-center gap-9 justify-center flex-wrap">
+      <h1 className="text-2xl font-bold mb-4 text-center">Mahsulotlar</h1>
+      <div className="flex items-center gap-6 justify-center flex-wrap">
         {allProducts.map((item) => (
           <Link
             key={item.id}
-            to={`/CardDetail/${item.id}`} // 👈 navigatsiya
-            className="block no-underline"
+            to={`/CardDetail/${item.id}?category=${encodeURIComponent(
+              item.category
+            )}`}
+            className="block w-[288px] h-[347px] gap-4 opacity-100 rounded-[8px]  p-4 bg-white shadow hover:shadow-lg transition cursor-pointer"
           >
-            <div className="border p-4 max-w-[290px] rounded-lg shadow-xl border-0 hover:shadow-lg duration-200 cursor-pointer">
+            {item.img && (
               <img
-                src={item.image}
-                alt={item.name}
-                className="w-full h-60 object-cover rounded-lg"
+                src={item.img}
+                alt={item.title}
+                className="w-full h-40 object-cover rounded"
               />
-              <p className="text-l font-semibold mt-3">{item.name}</p>
-              <p className="text-lg font-bold mt-2">${item.price}</p>
-              <p className="text-sm text-gray-500 mt-1">
-                Rating: ⭐ {item.rating}
+            )}
+            <p className="text-sm font-semibold mt-2 text-center">
+              {item.title}
+            </p>
+            {item.price && (
+              <p className="text-sm text-center text-gray-500">
+                {item.price.toLocaleString()} UZS
               </p>
-            </div>
+            )}
           </Link>
         ))}
       </div>

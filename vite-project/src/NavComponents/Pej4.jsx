@@ -1,8 +1,5 @@
-
 const Pej4 = () => {
-  return (
-    <div>Pej4</div>
-  )
-}
+  return <div>Pej4</div>;
+};
 
-export default Pej4
+export default Pej4;

@@ -5,12 +5,13 @@ import Footer from "./Footer";
 const Layout = () => {
   return (
     <div>
-        <Nav/>
-              <Outlet />
-              <br /><br />
-        <Footer />
+      <Nav />
+      <Outlet />
+      <br />
+      <br />
+      <Footer />
     </div>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;
